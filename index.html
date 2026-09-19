@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>印匠 · 印刷老师傅智能体</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ============ 左侧栏：品牌 + 页面切换 + 对话历史 ============ -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">印</div>
+      <div class="brand-text">
+        <strong>印匠</strong>
+        <span>印刷老师傅智能体</span>
+      </div>
+    </div>
+
+    <nav class="pager" id="pager">
+      <span class="pager-thumb" id="pagerThumb"></span>
+      <button class="pager-btn is-active" data-page="agent">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.4 9 9 0 0 1-3.6-.7L4 21l1.5-4.2A8.2 8.2 0 0 1 4 11.5 8.4 8.4 0 0 1 12.5 3 8.4 8.4 0 0 1 21 11.5Z"/></svg>
+        <span>智能体</span>
+      </button>
+      <button class="pager-btn" data-page="tools">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 1 1 5.3 5.3l-8.4 8.4a2 2 0 0 1-2.8 0l-2.5-2.5a2 2 0 0 1 0-2.8Z"/><path d="M4 7h4M6 5v4M15 17l2 2"/></svg>
+        <span>工具</span>
+      </button>
+    </nav>
+
+    <div class="side-section">
+      <div class="side-head">
+        <span class="side-title">对话记录</span>
+        <button class="mini-btn" id="btnNewChat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+          新建
+        </button>
+      </div>
+      <div class="session-list" id="sessionList"></div>
+    </div>
+
+    <div class="side-foot">
+      <div class="kb-stat">
+        <span class="kb-stat-dot"></span>
+        <span id="kbStatText">知识库已就绪</span>
+      </div>
+      <p class="side-note">本地检索 · 内容可替换</p>
+    </div>
+  </aside>
+
+  <div class="stage">
+
+    <!-- ============ 智能体页 ============ -->
+    <main class="main" id="viewAgent">
+      <section class="cover" id="cover">
+        <div class="cover-blob b1"></div>
+        <div class="cover-blob b2"></div>
+        <div class="cover-blob b3"></div>
+        <div class="cover-text">
+          <span class="cover-badge">
+            <span class="badge-dot"></span>
+            知识库驱动 · 每条回答都标出处
+          </span>
+          <h1>有什么印刷上的事，<br>问我就行。</h1>
+          <p>印前文件、纸张材料、色彩管理、上机故障、印后工艺、成本报价——印匠按右边知识库里的资料给你答案。</p>
+          <div class="cover-chips">
+            <button class="chip-ask" data-q="铜版纸和哑粉纸怎么选？">铜版纸和哑粉纸怎么选？</button>
+            <button class="chip-ask" data-q="文件出血要留多少？">文件出血要留多少？</button>
+            <button class="chip-ask" data-q="印出来比屏幕暗怎么办？">印出来比屏幕暗怎么办？</button>
+          </div>
+        </div>
+        <div class="cover-art">
+          <div class="inkmark">
+            <span class="dot c"></span>
+            <span class="dot m"></span>
+            <span class="dot y"></span>
+          </div>
+          <span class="cbar"></span>
+          <span class="creg"></span>
+        </div>
+        <button class="cover-toggle" id="coverToggle" title="收起封面">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg>
+        </button>
+      </section>
+
+      <section class="chat">
+        <div class="chat-scroll" id="chatScroll">
+          <div class="chat-empty" id="chatEmpty">
+            <div class="empty-grid">
+              <button class="empty-card" data-q="只印 100 份宣传单，怎么印最省钱？">
+                <span class="empty-icon i-indigo">¥</span>
+                <b>小批量怎么省钱</b>
+                <em>数码还是胶印，拼版怎么算</em>
+              </button>
+              <button class="empty-card" data-q="印刷文件交付前要注意什么？">
+                <span class="empty-icon i-cyan">◧</span>
+                <b>印前文件规范</b>
+                <em>出血、转曲、分辨率、PDF</em>
+              </button>
+              <button class="empty-card" data-q="套印不准是什么原因？">
+                <span class="empty-icon i-pink">!</span>
+                <b>上机故障排查</b>
+                <em>套印、墨杠、糊版、过底</em>
+              </button>
+              <button class="empty-card" data-q="画册封面想显得高级一点怎么做？">
+                <span class="empty-icon i-amber">✦</span>
+                <b>印后工艺搭配</b>
+                <em>覆膜、UV、烫金、装订</em>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="composer">
+          <div class="composer-box">
+            <textarea id="input" rows="1" placeholder="说说你遇到的印刷问题，比如：250g 哑粉纸折页爆色怎么处理？"></textarea>
+            <div class="composer-bar">
+              <label class="switch">
+                <input type="checkbox" id="kbSwitch" checked>
+                <span class="switch-track"><span class="switch-knob"></span></span>
+                <span class="switch-label">引用知识库</span>
+              </label>
+              <span class="composer-hint">Enter 发送 · Shift + Enter 换行</span>
+              <button class="send-btn" id="sendBtn">
+                <span>发送</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============ 工具页 ============ -->
+    <section class="tools-view" id="viewTools" hidden>
+      <header class="page-head">
+        <div>
+          <h1>工具中心</h1>
+          <p>把老师傅脑子里的算法，做成点一下就出结果的小工具。</p>
+        </div>
+        <span class="badge-soon">整体进度 待开发</span>
+      </header>
+
+      <div class="tools-banner">
+        <div class="banner-left">
+          <span class="banner-emoji">🛠️</span>
+          <div>
+            <b>工具箱正在打磨中</b>
+            <p>工具会复用同一套知识库数据，先让智能体跑起来，工具随后就到。</p>
+          </div>
+        </div>
+        <div class="banner-right">
+          <div class="progress"><span style="width:32%"></span></div>
+          <em>已完成 32%</em>
+        </div>
+      </div>
+
+      <div class="tool-grid">
+        <article class="tool-card">
+          <span class="tool-icon t-indigo">¥</span>
+          <b>报价快速估算</b>
+          <p>输入尺寸、页数、印量、纸张开数，自动算开机费、纸张成本与总价。</p>
+          <span class="tag-soon">待开发</span>
+        </article>
+        <article class="tool-card">
+          <span class="tool-icon t-cyan">▤</span>
+          <b>纸张克重 · 厚度换算</b>
+          <p>铜版、哑粉、白卡、特种纸的克重↔厚度↔单张成本互算。</p>
+          <span class="tag-soon">待开发</span>
+        </article>
+        <article class="tool-card">
+          <span class="tool-icon t-pink">◫</span>
+          <b>开数 · 拼版计算</b>
+          <p>按成品尺寸和上机尺寸自动推荐最省纸的开数与拼版方案。</p>
+          <span class="tag-soon">待开发</span>
+        </article>
+        <article class="tool-card">
+          <span class="tool-icon t-amber">◎</span>
+          <b>出血与文件自检</b>
+          <p>上传 PDF / 图片，检查出血、分辨率、单色黑、线宽是否达标。</p>
+          <span class="tag-soon">待开发</span>
+        </article>
+        <article class="tool-card">
+          <span class="tool-icon t-green">Δ</span>
+          <b>色差 ΔE 估算</b>
+          <p>输入两色色值，估算印刷色差等级与是否可接受。</p>
+          <span class="tag-soon">待开发</span>
+        </article>
+        <article class="tool-card">
+          <span class="tool-icon t-violet">订</span>
+          <b>装订方式推荐</b>
+          <p>按页数、克重、预算推荐骑马钉 / 胶装 / 锁线 / 精装。</p>
+          <span class="tag-soon">待开发</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ 右侧：知识库窗口 ============ -->
+    <aside class="kb" id="kbPanel">
+      <header class="kb-head">
+        <div class="kb-head-text">
+          <h2>知识库</h2>
+          <p id="kbMeta">— 份资料 · — 个知识小节</p>
+        </div>
+        <button class="icon-btn" id="kbToggleBtn" title="收起 / 展开知识库">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+      </header>
+
+      <div class="kb-body" id="kbBody">
+        <div class="kb-drop" id="dropzone">
+          <input type="file" id="fileInput" multiple accept=".md,.markdown,.txt,.csv,.json,.log,text/*">
+          <span class="drop-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>
+          </span>
+          <b>把资料拖进来</b>
+          <p>支持 .md / .txt / .csv / .json，或点击选择文件</p>
+        </div>
+
+        <div class="kb-tools" id="kbTools">
+          <div class="kb-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+            <input id="kbSearch" placeholder="搜索文件或知识小节">
+          </div>
+          <button class="mini-btn ghost" id="btnResetKb" title="恢复内置知识库">重置</button>
+        </div>
+
+        <div class="kb-list" id="kbList"></div>
+
+        <div class="kb-preview" id="kbPreview" hidden>
+          <div class="preview-head">
+            <button class="icon-btn sm" id="previewBack" title="返回列表">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+            </button>
+            <div class="preview-title">
+              <b id="previewName">—</b>
+              <span id="previewMeta">—</span>
+            </div>
+            <button class="mini-btn" id="previewAsk">拿这份资料提问</button>
+          </div>
+          <div class="preview-body" id="previewBody"></div>
+        </div>
+      </div>
+    </aside>
+
+    <button class="kb-fab" id="kbFab" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v18H6.5A2.5 2.5 0 0 1 4 18.5Z"/><path d="M8 8h7M8 12h7"/></svg>
+      知识库
+    </button>
+
+  </div>
+</div>
+
+<!-- ============ 全局提示条 ============ -->
+<div class="toast" id="toast" hidden></div>
+
+<script src="data/knowledge.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
